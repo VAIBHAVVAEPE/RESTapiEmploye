@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using RESTapiEmploye.Model;
 using RESTapiEmploye.Services;
 using System.Collections.Generic;
 
@@ -10,14 +11,14 @@ namespace RESTapiEmploye.Controllers
     [ApiController]
     public class EmployeController : ControllerBase
     {
-        IEmployeServices _service;
+       readonly IEmployeServices _service;
         public EmployeController(IEmployeServices service)
         {
             _service = service;
         }
         // GET: api/<EmployeController>
         [HttpGet]
-        [Route ("GEtAllEmployes")]
+        [Route ("GetAllEmployes")]
         public IActionResult GetAllEmployes()
         {
             return new ObjectResult( _service.GetAllEmploye());
@@ -34,13 +35,13 @@ namespace RESTapiEmploye.Controllers
         // POST api/<EmployeController>
         [HttpPost]
         [Route ("AddEmploye")]
-        public int AddEmploye([FromBody] EmployeController emp)
+        public int AddEmploye([FromBody] Employe emp)
         {
             return _service.AddEmploye(emp);
         }
         [HttpPost]
         [Route("ModifyEmploye")]
-        public int ModifyEmploye([FromBody] EmployeController emp)
+        public int ModifyEmploye([FromBody] Employe emp)
         {
             return _service.ModifyEmploye(emp);
         }
@@ -53,7 +54,7 @@ namespace RESTapiEmploye.Controllers
         [Route("DeleteEmploye/{id} ")]
         public int DeleteEmploye(int id)
         {
-            return new ObjectResult(_service.DeleteEmploye(id));
+            return _service.DeleteEmploye(id);
         }
     }
 }

@@ -6,7 +6,7 @@ namespace RESTapiEmploye.Services
 {
     public class EmployeServices : IEmployeServices
     {
-        EmployeRepositories _repo;
+        readonly EmployeRepositories _repo;
         public EmployeServices(EmployeRepositories repo)
         {
             _repo = repo;
@@ -29,6 +29,11 @@ namespace RESTapiEmploye.Services
         public Employe GetEmployeById(int id)
         {
             return _repo.GetEmployeById(id);
+        }
+
+        public object GetEmployeById()
+        {
+            throw new System.NotImplementedException();
         }
 
         public int ModifyEmploye(Employe emp)
